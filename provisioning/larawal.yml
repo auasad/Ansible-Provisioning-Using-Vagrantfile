@@ -1,0 +1,39 @@
+---
+ - hosts: all
+   become: yes
+   become_method: sudo
+
+   tasks:
+    - name: Update apt cache
+      apt: update_cache=yes
+
+    - name: Install Nginx
+      apt: name=nginx state=present
+
+    - name: Creating Directory For Code
+      file: path=/var/www/html/myweb state=directory
+
+    - name: Moving Code
+      copy: src=/etc/ansible/code/  dest=/var/www/html/myweb  directory_mode=yes
+
+    - name: Add Repo For PHP7.2
+      apt_repository:
+       repo="ppa:ondrej/php" update_cache=yes
+
+    - name: Install PHP-7.2-FPM
+      apt: name=php7.2-fpm
+
+    - name: Install MongoDB
+      apt: name=mongodb state=present
+
+    - name: Configuring Default Site
+      copy: src=/etc/ansible/conf/default dest=/etc/nginx/sites-available/default
+
+    - name: Restart Nginx Service
+      service: name=nginx state=restarted
+
+    - name: Restart PHP-FPM Service
+      service: name=php7.2-fpm state=restarted
+
+    - name: Restart Mongo Service
+      service: name=mongodb state=restarted
