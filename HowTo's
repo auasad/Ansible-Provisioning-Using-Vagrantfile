@@ -1,1 +1,42 @@
+In this project we will provision an ansible file(larawal.yml for this project) usig Vagrantfile.
+let's start it.
 
+Step 01: Fork this repo into your Github account
+1. On your terminal type the command;
+
+    git clone https://github.com/auasad/Ansible-Provisioning-Using-Vagrantfile.git
+    
+   This will clone the Ansible-Provisioning-Using-Vagrantfile into your local machine.
+   
+2. Get into the directory you have just clone   
+   cd Ansible-Provisioning-Using-Vagrantfile    //To get into the directory
+   ls Ansible-Provisioning-Using-Vagrantfile    //To list the content of the directory
+   
+  Here, you will see the code, conf and provisioning directories along with Vagrantfile.
+
+Step 02: Set up vagrant:
+To set up the vagrant here is the link https://www.vagrantup.com/downloads.html
+it will also required a provider i.e. virtual box or vmware , here is the link for virtualbox https://www.virtualbox.org/ 
+
+Step 03: Install Ansible on your local machine
+For Ansible installation, here is the link https://docs.ansible.com/ansible/2.5/installation_guide/intro_installation.html
+
+Step 04: Configuring the Ansible Host
+After Ansible Installation just go to the Host directory of  ansible and add the "127.0.0.1 ansible_connection=local" just as below;
+
+cd /etc/ansible/
+vim host
+
+And add the following lines;
+[localhost]
+127.0.0.1 ansible_connection=local
+
+save the file.
+
+Step 0: Running Vagrantfile
+Now its the time to run the Vagrantfile.
+
+cd Ansible-Provisioning-Using-Vagrantfile
+vagrant up
+
+This will spin a VM on your virtualbox using Vagrantfile and will provision ansible fil.
